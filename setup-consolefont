@@ -1,0 +1,14 @@
+#!/bin/sh
+
+apk add terminus-font
+setfont /usr/share/consolefonts/ter-132n.psf.gz
+
+if ! grep -q ter-132n /etc/conf.d/consolefont; then
+  {
+    echo
+    echo '# alpine-user-conf: setup-consolefont'
+    echo 'consolefont="ter-132n.psf.gz"'
+  } >> /etc/conf.d/consolefont
+fi
+
+rc-update add consolefont boot
