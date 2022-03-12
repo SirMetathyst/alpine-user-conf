@@ -3,7 +3,7 @@
 apk add terminus-font
 setfont /usr/share/consolefonts/ter-132n.psf.gz
 
-if ! grep -q ter-132n /etc/conf.d/consolefont; then
+if ! grep -q ter-132n /etc/conf.d/consolefont && [ -f "/usr/share/consolefonts/ter-132n.psf.gz" ]; then
   {
     echo
     echo '# alpine-user-conf: setup-consolefont'
