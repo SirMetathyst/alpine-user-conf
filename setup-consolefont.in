@@ -3,18 +3,24 @@
 PROGRAM=setup-consolefont
 VERSION=@VERSION@
 
-PREFIX=
-. $PREFIX/lib/libusralpine.sh
+# PREFIX=
+# . $PREFIX/lib/libalpine.sh
+# . $PREFIX/lib/libusralpine.sh
 
-FONTFILE=/etc/conf.d/consolefont
+
+FONTPKGS=terminus-font
+FONTCNFDIR=/etc/conf.d
+FONTCNF=consolefont
+FONTDIR=/usr/share/consolefonts
+FONT=ter-132n.psf.gz
 
 echo "Add terminus-font"
-apk add terminus-font || exit 1
+apk add $FONTPKGS || exit 1
 
 echo "Configure font"
-setfont /usr/share/consolefonts/ter-132n.psf.gz || exit 2
+setfont $FONTDIR/$FONT || exit 2
 
-cat >$FONTFILE <<-__EOF__
+cat >$FONCNFDIR/$FONTCNF <<-__EOF__
 # The consolefont service is not activated by default. If you need to
 # use it, you should run "rc-update add consolefont boot" as root.
 #
@@ -28,7 +34,7 @@ consolefont="default8x16.psf.gz"
 #consoletranslation="8859-1_to_uni.trans"
 
 # alpine-user-conf: setup-consolefont
-consolefont="ter-132n.psf.gz"
+consolefont="$FONT"
 __EOF__
 
 rc-update -q add consolefont boot
