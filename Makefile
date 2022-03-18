@@ -3,7 +3,8 @@ PREFIX     ?=
 LIB_FILES  := libusralpine.sh
 SBIN_FILES := setup-consolefont\
 	      setup-networking\
-	      setup-networking-with-wifi
+	      setup-networking-with-wifi\
+	      setup-networking-with-wifi-only
 
 SCRIPTS    := $(LIB_FILES) $(SBIN_FILES)
 
