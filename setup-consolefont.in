@@ -19,7 +19,7 @@ apk add $FONTPKGS || exit 1
 echo "Configure font"
 setfont $FONTDIR/$FONT || exit 2
 
-cat >$FONCNFDIR/$FONTCNF <<-__EOF__
+cat >$FONTCNFDIR/$FONTCNF <<-__EOF__
 # The consolefont service is not activated by default. If you need to
 # use it, you should run "rc-update add consolefont boot" as root.
 #
