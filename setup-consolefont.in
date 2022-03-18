@@ -7,7 +7,6 @@ VERSION=@VERSION@
 # . $PREFIX/lib/libalpine.sh
 # . $PREFIX/lib/libusralpine.sh
 
-
 FONTPKGS=terminus-font
 FONTCNFDIR=/etc/conf.d
 FONTCNF=consolefont
@@ -37,4 +36,4 @@ consolefont="default8x16.psf.gz"
 consolefont="$FONT"
 __EOF__
 
-rc-update -q add consolefont boot
+rc-update add consolefont boot
