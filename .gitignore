@@ -1,3 +1,6 @@
 *.tar.gz
 *.sh
+*.conf
 setup-consolefont
+setup-networking
+setup-networking-with-wifi

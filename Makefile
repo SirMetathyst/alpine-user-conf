@@ -1,7 +1,10 @@
 VERSION    := 0.1
 PREFIX     ?= 
 LIB_FILES  := libusralpine.sh
-SBIN_FILES := setup-consolefont
+SBIN_FILES := setup-consolefont\
+	      setup-networking\
+	      setup-networking-with-wifi
+
 SCRIPTS    := $(LIB_FILES) $(SBIN_FILES)
 
 
@@ -14,7 +17,7 @@ else
 	FULL_VERSION := $(VERSION)
 endif
 
-DESC="Alpine user configuration scripts by SirMetathyst based on alpine-conf"
+DESC="Alpine user configuration scripts based on alpine-conf by SirMetathyst"
 WWW="https://github.com/SirMetathyst/alpine-user-conf"
 
 SED         := sed
