@@ -48,9 +48,10 @@ fi
 
 if [ -n "$REMOVE" ]; then 
 
-	echo "Removing modifications"
+	echo "Removing consolefont service from boot"
 	rc-update del consolefont boot
-  
+
+	echo "Overwriting $FONTCNFDIR/$FONTCNF with default configuration"
 	cat >$FONTCNFDIR/$FONTCNF <<-__EOF__
 	# The consolefont service is not activated by default. If you need to
 	# use it, you should run "rc-update add consolefont boot" as root.
@@ -65,21 +66,22 @@ if [ -n "$REMOVE" ]; then
 	#consoletranslation="8859-1_to_uni.trans"
 	__EOF__
   
-	echo "Remove font"
+	echo "Removing font"
 	apk del $FONTPKGS
 
-	echo "Configure default font"
+	echo "Configuring default font"
 	setfont $FONTDIR/$DEFAULTFONT
   
 	exit 0
 fi
 
-echo "Add font"
+echo "Adding font"
 apk add $FONTPKGS || exit 1
 
-echo "Configure font"
+echo "Configuring font"
 setfont $FONTDIR/$FONT || exit 2
 
+echo "Overwriting $FONTCNFDIR/$FONTCNF with custom configuration"
 cat >$FONTCNFDIR/$FONTCNF <<-__EOF__
 # The consolefont service is not activated by default. If you need to
 # use it, you should run "rc-update add consolefont boot" as root.
@@ -97,4 +99,5 @@ consolefont="default8x16.psf.gz"
 consolefont="$FONT"
 __EOF__
 
+echo "Adding consolefont service to boot"
 rc-update add consolefont boot
