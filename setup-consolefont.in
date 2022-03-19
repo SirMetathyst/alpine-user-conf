@@ -15,56 +15,61 @@ DEFAULTFONT=default8x16.psfu.gz
 FONT=ter-132n.psf.gz
 
 usage() {
-	cat <<-__EOF__
-	usage: setup-consolefont [-h|--help|-r|--remove]
-
-	Setup console font
-
-	options:
-	-h|--help Show this help
-	-r|--remove Remove the modifications done by this setup
-	__EOF__
-	exit 1
+  cat <<-__EOF__
+  usage: setup-consolefont [-h|--help|-r|--remove]
+  
+  Setup console font
+  
+  options:
+  -h|--help Show this help
+  -r|--remove Remove the modifications done by this setup
+  __EOF__
+  
+  exit 1
 }
 
 while true; do
-	case "$1" in
-		-r|--remove)
-			REMOVE=1
-			shift;;
-		-h|--help)
-			HELP=1
-			shift;;
-		*)
-			break;;
-	esac
+  case "$1" in
+    -r|--remove)
+      REMOVE=1
+      shift;;
+    -h|--help)
+      HELP=1
+      shift;;
+    *)
+      break;;
+  esac
 done
 
 if [ -n "$HELP" ]; then 
-	usage
+  usage
 fi
 
 if [ -n "$REMOVE" ]; then 
-	echo "Removing modifications"
-	rc-update del consolefont boot
-	cat >$FONTCNFDIR/$FONTCNF <<-__EOF__
-	# The consolefont service is not activated by default. If you need to
-	# use it, you should run "rc-update add consolefont boot" as root.
-	#
-	# consolefont specifies the default font that you'd like Linux to use on the
-	# console.  You can find a good selection of fonts in /usr/share/consolefonts;
-	consolefont="default8x16.psf.gz"
+  echo "Removing modifications"
+  rc-update del consolefont boot
+  
+  cat >$FONTCNFDIR/$FONTCNF <<-__EOF__
+  # The consolefont service is not activated by default. If you need to
+  # use it, you should run "rc-update add consolefont boot" as root.
+  #
+  # consolefont specifies the default font that you'd like Linux to use on the
+  # console.  You can find a good selection of fonts in /usr/share/consolefonts;
+  consolefont="default8x16.psf.gz"
+ 
+  # consoletranslation is the charset map file to use.  Leave commented to use
+  # the default one.  Have a look in /usr/share/consoletrans for a selection of
+  # map files you can use.
+  #consoletranslation="8859-1_to_uni.trans"
+  __EOF__
+  
+  echo "Remove font"
+  apk del $FONTPKGS
 
-	# consoletranslation is the charset map file to use.  Leave commented to use
-	# the default one.  Have a look in /usr/share/consoletrans for a selection of
-	# map files you can use.
-	#consoletranslation="8859-1_to_uni.trans"
-	__EOF__
-	echo "Remove font"
-	apk del $FONTPKGS
-	echo "Configure default font"
-	setfont $FONTDIR/$DEFAULTFONT
-	exit 0
+  echo "Configure default font"
+  setfont $FONTDIR/$DEFAULTFONT
+  
+  exit 0
 fi
 
 echo "Add font"
