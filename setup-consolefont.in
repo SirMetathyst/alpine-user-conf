@@ -69,7 +69,7 @@ if [ -n "$REMOVE" ]; then
 	echo "Removing font"
 	apk del $FONTPKGS
 
-	echo "Configuring default font"
+	echo "Using default font"
 	setfont $FONTDIR/$DEFAULTFONT
   
 	exit 0
@@ -78,7 +78,7 @@ fi
 echo "Adding font"
 apk add $FONTPKGS || exit 1
 
-echo "Configuring font"
+echo "Using font"
 setfont $FONTDIR/$FONT || exit 2
 
 echo "Overwriting $FONTCNFDIR/$FONTCNF with custom configuration"
