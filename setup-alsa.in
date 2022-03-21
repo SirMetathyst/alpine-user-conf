@@ -16,9 +16,9 @@ echo "Adding group"
 addgroup root audio
 addgroup $USER audio
 
-echo "Assuming default sound is card id 0. If yours is different then"
+echo "Assuming desired default sound card is id 0. If yours is different then"
 echo "open /usr/share/alsa/alsa.conf and update the following lines with your"
-echo "sound card id found by pressing F6 in alsamixer."
+echo "desired sound card id found by pressing F6 in alsamixer."
 echo "defaults.ctl.card 0"
 echo "defaults.pcm.card 0" 
 
