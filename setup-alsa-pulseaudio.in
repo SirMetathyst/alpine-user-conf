@@ -1,0 +1,18 @@
+#!/bin/sh
+
+PROGRAM=setup-alsa-pulseaudio
+VERSION=@VERSION@
+
+# PREFIX=
+# . $PREFIX/lib/libalpine.sh
+# . $PREFIX/lib/libusralpine.sh
+
+echo "Adding pulseaudio"
+apk add pulseaudio pulseaudio-alsa alsa-plugins-pulse
+
+echo "Adding group"
+addgroup root audio
+addgroup $USER audio
+
+echo "Overwriting /etc/security/limits.d/audio.conf with custom configuration"
+echo "@audio - nice -11" > /etc/security/limits.d/audio.conf

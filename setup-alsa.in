@@ -1,0 +1,29 @@
+#!/bin/sh
+
+PROGRAM=setup-alsa
+VERSION=@VERSION@
+
+# PREFIX=
+# . $PREFIX/lib/libalpine.sh
+# . $PREFIX/lib/libusralpine.sh
+
+APKPKGS=alsa-utils alsa-utils-doc alsa-lib
+
+echo "Adding alsa"
+apk add $APKPKGS
+
+echo "Adding group"
+addgroup root audio
+addgroup $USER audio
+
+echo "Assuming default sound is card id 0. If yours is different then"
+echo "open /usr/share/alsa/alsa.conf and update the following lines with your"
+echo "sound card id found by pressing F6 in alsamixer."
+echo "defaults.ctl.card 0"
+echo "defaults.pcm.card 0" 
+
+echo "Adding alsa service to default"
+rc-update add alsa
+
+echo "Starting/Restarting alsa service"
+rc-service alsa restart
