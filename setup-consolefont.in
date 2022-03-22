@@ -11,7 +11,7 @@ APKPKGS=terminus-font
 FONT=ter-132n.psf.gz
 
 echo "Adding font"
-apk add $APKPKGS || exit 1
+apk add "$APKPKGS" || exit 1
 
 echo "Using font"
 setfont /usr/share/consolefonts/$FONT || exit 2

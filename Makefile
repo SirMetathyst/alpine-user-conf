@@ -6,7 +6,8 @@ SBIN_FILES := setup-consolefont\
 	      setup-networking-with-wifi\
 	      setup-networking-with-wifi-only\
 	      setup-alsa\
-	      setup-alsa-pulseaudio
+	      setup-alsa-pulseaudio\
+	      setup-pipewire
 
 SCRIPTS    := $(LIB_FILES) $(SBIN_FILES)
 

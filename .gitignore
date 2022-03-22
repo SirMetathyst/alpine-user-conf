@@ -7,3 +7,4 @@ setup-networking-with-wifi
 setup-networking-with-wifi-only
 setup-alsa
 setuo-alsa-pulseaudio
+setup-pipewire

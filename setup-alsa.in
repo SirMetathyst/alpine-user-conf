@@ -7,14 +7,12 @@ VERSION=@VERSION@
 # . $PREFIX/lib/libalpine.sh
 # . $PREFIX/lib/libusralpine.sh
 
-APKPKGS=alsa-utils alsa-utils-doc alsa-lib
-
 echo "Adding alsa"
-apk add $APKPKGS
+apk add alsa-utils alsa-utils-doc alsa-lib
 
 echo "Adding group"
 addgroup root audio
-addgroup $USER audio
+addgroup "$USER" audio
 
 echo "Assuming desired default sound card is id 0. If yours is different then"
 echo "open /usr/share/alsa/alsa.conf and update the following lines with your"
