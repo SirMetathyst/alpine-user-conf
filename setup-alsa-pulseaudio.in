@@ -10,7 +10,7 @@ VERSION=@VERSION@
 echo "Adding pulseaudio"
 apk add pulseaudio pulseaudio-alsa alsa-plugins-pulse
 
-echo "Adding group"
+echo "Adding audio group"
 addgroup root audio
 addgroup "$USER" audio
 

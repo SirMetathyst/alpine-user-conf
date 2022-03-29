@@ -10,7 +10,7 @@ VERSION=@VERSION@
 echo "Adding alsa"
 apk add alsa-utils alsa-utils-doc alsa-lib
 
-echo "Adding group"
+echo "Adding audio group"
 addgroup root audio
 addgroup "$USER" audio
 

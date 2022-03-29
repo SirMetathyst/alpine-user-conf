@@ -7,8 +7,15 @@ VERSION=@VERSION@
 # . $PREFIX/lib/libalpine.sh
 # . $PREFIX/lib/libusralpine.sh
 
+echo "Adding dbus"
+apk add dbus dbus-openrc dbus-x11
+
 echo "Adding pipewire"
-apk add dbus dbus-openrc dbus-x11 pipewire pipewire-alsa wireplumber rtkit || exit 1
+apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || exit 1
+
+echo "Adding audio group"
+addgroup root audio
+addgroup $USER audio
 
 echo "Creating directory /etc/pipewire"
 mkdir -p /etc/pipewire || exit 2

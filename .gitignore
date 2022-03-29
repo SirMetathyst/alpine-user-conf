@@ -8,3 +8,6 @@ setup-networking-with-wifi-only
 setup-alsa
 setuo-alsa-pulseaudio
 setup-pipewire
+setup-doas
+setup-bluetooth-pipewire
+setup-udevil
