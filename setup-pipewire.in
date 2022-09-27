@@ -1,26 +1,42 @@
 #!/bin/sh
 
-PROGRAM=setup-pipewire
+#########################################################################################
+# PROGRAM METADATA
+#########################################################################################
+
+PROGRAM=$(basename $0)
+PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
 
-# PREFIX=
-# . $PREFIX/lib/libalpine.sh
-# . $PREFIX/lib/libusralpine.sh
+#########################################################################################
+# PROGRAM DEPENDENCIES
+#########################################################################################
 
-echo "Adding dbus"
-apk add dbus dbus-openrc dbus-x11
+. "@LIB_DIR@/libusralpine.sh"
 
-echo "Adding pipewire"
+#########################################################################################
+# PREREQUISITES 
+#########################################################################################
+
+"$PROGRAM_DIR/setup-dbus"
+
+#########################################################################################
+# PROGRAM 
+#########################################################################################
+
+header $PROGRAM
+
+step "adding pipewire"
 apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || exit 1
 
-echo "Adding audio group"
+step "adding audio group"
 addgroup root audio
 addgroup $USER audio
 
-echo "Creating directory /etc/pipewire"
+step "creating directory /etc/pipewire"
 mkdir -p /etc/pipewire || exit 2
 
-echo "Overwriting /etc/pipewire/pipewire.conf with custom configuration"
+step "overwriting /etc/pipewire/pipewire.conf with custom configuration"
 cat >/etc/pipewire/pipewire.conf <<-__EOF__
 # alpine-user-conf: setup-pipewire
 
@@ -275,7 +291,7 @@ context.exec = [
 ]
 __EOF__
 
-echo "Overwriting /usr/share/polkit-1/actions/org.freedesktop.RealtimeKit1.policy with custom configuration"
+step "overwriting /usr/share/polkit-1/actions/org.freedesktop.RealtimeKit1.policy with custom configuration"
 cat >/usr/share/polkit-1/actions/org.freedesktop.RealtimeKit1.policy <<-__EOF__
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
@@ -311,19 +327,17 @@ cat >/usr/share/polkit-1/actions/org.freedesktop.RealtimeKit1.policy <<-__EOF__
 </policyconfig>
 __EOF__
 
-echo "Enabling snd_seq kernel module for alsa support"
+step "enabling snd_seq kernel module for alsa support"
 if ! grep -q "snd_seq" /etc/modules; then
         echo "snd_seq" >> /etc/modules
 fi
 
-echo "Adding dbus service to default"
-rc-update add dbus default
-
-echo "Starting/Restarting dbus service"
+step "restarting dbus service"
 rc-service dbus restart
 
-echo "Start pipewire with pipewire &"
-echo "If you are using swaywm then start sway with"
+echo
+echo "start pipewire with pipewire &"
+echo "if you are using swaywm then start sway with"
 echo "dbus-launch --exit-with-session sway or"
 echo "dbus-launch --exit-with-session seatd-launch sway when using"
 echo "seatd with seatd launch"

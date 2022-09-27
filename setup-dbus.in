@@ -12,14 +12,19 @@ VERSION=@VERSION@
 # PROGRAM DEPENDENCIES
 #########################################################################################
 
-. "@LIB_DIR@/libtest.sh"
+. "@LIB_DIR@/libusralpine.sh"
 
 #########################################################################################
 # PROGRAM 
 #########################################################################################
 
-echo $PROGRAM
+header $PROGRAM
 
-echo "TEST DEP"
+step "adding dbus"
+apk add dbus dbus-openrc dbus-x11
 
-test_print
+step "adding dbus service to default"
+rc-update add dbus default
+
+step "starting dbus service"
+rc-service dbus start

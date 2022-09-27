@@ -1,7 +1,6 @@
 VERSION    := 0.1
 
-LIB_FILES  := libusralpine.sh\
-			  libtest.sh
+LIB_FILES  := libusralpine.sh
 
 SETUP_FILES := setup-consolefont\
 	      setup-networking\
@@ -13,8 +12,7 @@ SETUP_FILES := setup-consolefont\
 	      setup-doas\
 	      setup-bluetooth-pipewire\
 	      setup-udevil\
-		  setup-test-dep\
-		  setup-test
+		  setup-dbus
 
 SCRIPTS    := $(LIB_FILES) $(SETUP_FILES)
 
