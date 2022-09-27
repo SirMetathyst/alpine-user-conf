@@ -4,7 +4,7 @@
 # MODULE 
 #########################################################################################
 
-function header()
+header()
 {
     echo
     echo "#########################################################################################"
@@ -13,27 +13,27 @@ function header()
     echo
 }
 
-function step()
+step()
 {
     echo "-> $1"   
 }
 
-function footer_start()
+footer_start()
 {
     echo
     echo
 
-    if [$# -gt 0]; then 
-        echo $1
+    if [ $# -gt 0 ]; then 
+        echo "$1"
     fi 
 }
 
-function footer_text()
+footer_text()
 {
     echo "# $1"
 }
 
-function footer_end()
+footer_end()
 {
     echo
     echo

@@ -4,7 +4,7 @@
 # PROGRAM METADATA
 #########################################################################################
 
-PROGRAM=$(basename $0)
+PROGRAM=$(basename "$0")
 PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
 
@@ -18,7 +18,7 @@ VERSION=@VERSION@
 # PROGRAM 
 #########################################################################################
 
-header $PROGRAM
+header "$PROGRAM"
 
 step "adding dbus"
 apk add dbus dbus-openrc

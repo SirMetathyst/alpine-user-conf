@@ -4,7 +4,7 @@
 # PROGRAM METADATA
 #########################################################################################
 
-PROGRAM=$(basename $0)
+PROGRAM=$(basename "$0")
 PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
 
@@ -24,14 +24,14 @@ VERSION=@VERSION@
 # PROGRAM 
 #########################################################################################
 
-header $PROGRAM
+header "$PROGRAM"
 
 step "adding pipewire"
 apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || exit 1
 
 step "adding audio group"
 addgroup root audio
-addgroup $USER audio
+addgroup "$USER" audio
 
 step "creating directory /etc/pipewire"
 mkdir -p /etc/pipewire || exit 2
