@@ -4,4 +4,4 @@ PROGRAM=setup-test
 PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
 
-"$PROGRAM_DIR/setup-test-dep.sh"
+"$PROGRAM_DIR/setup-test-dep"
