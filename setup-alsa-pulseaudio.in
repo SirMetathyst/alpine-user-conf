@@ -1,11 +1,16 @@
 #!/bin/sh
 
-PROGRAM=setup-alsa-pulseaudio
+#########################################################################################
+# PROGRAM METADATA
+#########################################################################################
+
+PROGRAM=$(basename $0)
+PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
 
-# PREFIX=
-# . $PREFIX/lib/libalpine.sh
-# . $PREFIX/lib/libusralpine.sh
+#########################################################################################
+# PROGRAM
+#########################################################################################
 
 echo "Adding pulseaudio"
 apk add pulseaudio pulseaudio-alsa alsa-plugins-pulse

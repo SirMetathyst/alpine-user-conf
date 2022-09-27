@@ -3,10 +3,6 @@
 PROGRAM=setup-networking-with-wifi-only
 VERSION=@VERSION@
 
-# PREFIX=
-# . $PREFIX/lib/libalpine.sh
-# . $PREFIX/lib/libusralpine.sh
-
 echo "Adding wpa_supplicant"
 apk add wpa_supplicant
 
