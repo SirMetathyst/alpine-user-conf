@@ -21,7 +21,7 @@ VERSION=@VERSION@
 header $PROGRAM
 
 step "adding dbus"
-apk add dbus dbus-openrc dbus-x11
+apk add dbus dbus-openrc
 
 step "adding dbus service to default"
 rc-update add dbus default
