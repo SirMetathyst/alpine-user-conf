@@ -1,6 +1,7 @@
 #!/bin/sh
 
-PROGRAM=$(basename "$0")
+PROGRAM=libtest
+PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
 
 function test_print()

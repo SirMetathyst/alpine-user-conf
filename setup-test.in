@@ -1,8 +1,7 @@
 #!/bin/sh
 
-PROGRAM=setup-alsa
+PROGRAM=setup-test
+PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
-BASEDIR=$(dirname $0)
-. "$BASEDIR/libtest.sh.in"
 
-test_print
+"$PROGRAM_DIR/setup-test-dep.sh"

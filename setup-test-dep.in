@@ -1,0 +1,15 @@
+#!/bin/sh
+
+PROGRAM=setup-test-dep
+PROGRAM_DIR=@PROGRAM_DIR@
+
+LIB_DIR=@LIB_DIR@
+
+VERSION=@VERSION@
+
+# INCLUDE LIB
+. "$LIB_DIR/libtest.sh"
+
+echo "TEST DEP"
+
+test_print
