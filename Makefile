@@ -38,7 +38,7 @@ all: $(SCRIPTS)
 
 install:  $(SETUP_FILES) $(LIB_FILES)
 	install -m 755 -d /sbin
-	install -m 755 $(SETUP_FILES) sbin
+	install -m 755 $(SETUP_FILES) /sbin
 	install -m 755 -d /lib
 	install -m 755 $(LIB_FILES) /lib
 
