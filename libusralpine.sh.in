@@ -15,5 +15,5 @@ function header()
 
 function step()
 {
-    echo "-> $1"   
+    echo "> $1"   
 }

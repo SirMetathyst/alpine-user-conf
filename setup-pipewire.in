@@ -342,3 +342,5 @@ echo "# if you are using swaywm then start sway with"
 echo "# dbus-launch --exit-with-session sway or"
 echo "# dbus-launch --exit-with-session seatd-launch sway when using"
 echo "# seatd with seatd launch"
+echo
+echo
