@@ -1,6 +1,8 @@
 VERSION    := 0.1
 PREFIX     ?= 
-LIB_FILES  := libusralpine.sh
+LIB_FILES  := libusralpine.sh\
+			  libtest.sh
+
 SBIN_FILES := setup-consolefont\
 	      setup-networking\
 	      setup-networking-with-wifi\
@@ -10,25 +12,16 @@ SBIN_FILES := setup-consolefont\
 	      setup-pipewire\
 	      setup-doas\
 	      setup-bluetooth-pipewire\
-	      setup-udevil
+	      setup-udevil\
+		  setup-test
 
 SCRIPTS    := $(LIB_FILES) $(SBIN_FILES)
 
-
-
-GET_REV := $(shell test -d .git && git describe || echo exported)
-ifneq ($(GIT_REV), exported)
-	FULL_VERSION := $(patsubst $(PACKAGE)-%,%,$(GET_REV))
-	FULL_VERSION := $(patsubst v%,%,$(FULL_VERSION))
-else
-	FULL_VERSION := $(VERSION)
-endif
-
-DESC="Alpine user configuration scripts based on alpine-conf by SirMetathyst"
+DESC="Alpine user configuration scripts inspired by alpine-conf by SirMetathyst"
 WWW="https://github.com/SirMetathyst/alpine-user-conf"
 
 SED         := sed
-SED_REPLACE := -e 's:@VERSION@:$(FULL_VERSION):g' \
+SED_REPLACE := -e 's:@VERSION@:$(VERSION):g' \
 	       -e 's:@PREFIX@:$(PREFIX):g'
 
 .SUFFIXES: .sh.in .in

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+PROGRAM=setup-alsa
+VERSION=@VERSION@
+BASEDIR=$(dirname $0)
+. "$BASEDIR/libtest.sh.in"
+
+test_print
