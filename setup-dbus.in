@@ -21,10 +21,16 @@ VERSION=@VERSION@
 header "$PROGRAM"
 
 step "adding dbus"
-apk add dbus dbus-openrc
+apk add dbus dbus-openrc || exit 1
 
 step "adding dbus service to default"
 rc-update add dbus default
+
+if [ $? -gt 0 ]; then 
+    step "deleting dbus"
+    apk del dbus dbus-openrc
+    exit 1
+fi
 
 step "starting dbus service"
 rc-service dbus start
