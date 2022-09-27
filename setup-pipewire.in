@@ -335,12 +335,10 @@ fi
 step "restarting dbus service"
 rc-service dbus restart
 
-echo
-echo 
-echo "# start pipewire with pipewire &"
-echo "# if you are using swaywm then start sway with"
-echo "# dbus-launch --exit-with-session sway or"
-echo "# dbus-launch --exit-with-session seatd-launch sway when using"
-echo "# seatd with seatd launch"
-echo
-echo
+footer_start
+footer_text "start pipewire with pipewire &"
+footer_text "if you are using swaywm then start sway with"
+footer_text "dbus-launch --exit-with-session sway or"
+footer_text "dbus-launch --exit-with-session seatd-launch sway when using"
+footer_text "seatd with seatd launch"
+footer_end

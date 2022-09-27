@@ -15,5 +15,26 @@ function header()
 
 function step()
 {
-    echo "> $1"   
+    echo "-> $1"   
+}
+
+function footer_start()
+{
+    echo
+    echo
+
+    if [$# -gt 0]; then 
+        echo $1
+    fi 
+}
+
+function footer_text()
+{
+    echo "# $1"
+}
+
+function footer_end()
+{
+    echo
+    echo
 }
