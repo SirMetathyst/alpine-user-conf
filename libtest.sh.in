@@ -1,9 +1,5 @@
 #!/bin/sh
 
-PROGRAM=libtest
-PROGRAM_DIR=@PROGRAM_DIR@
-VERSION=@VERSION@
-
 function test_print()
 {
     echo "test print function"

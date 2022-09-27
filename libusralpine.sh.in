@@ -1,4 +1,1 @@
 #!/bin/sh
-
-PREFIX=@PREFIX@
-PROGRAM=$(basename "$0")
