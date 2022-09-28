@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ "$EUID" -ne 0 ]; then 
+    echo "please run as root"
+    exit 1
+fi
+
 #########################################################################################
 # PROGRAM METADATA
 #########################################################################################
@@ -36,8 +41,8 @@ apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || die "pipeware
 step "adding root to audio group"
 addgroup root audio
 
-step "adding $USER to audio group"
-addgroup "$USER" audio
+step "adding $DOAS_USER to audio group"
+addgroup "$DOAS_USER" audio
 
 step "creating directory /etc/pipewire"
 mkdir -p /etc/pipewire || die "pipewire setup - failed to create directory /etc/pipewire"
