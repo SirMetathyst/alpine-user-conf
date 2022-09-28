@@ -18,7 +18,7 @@ VERSION=@VERSION@
 # PREREQUISITES 
 #########################################################################################
 
-"$PROGRAM_DIR/setup-dbus" || error "pipeware setup failed" ; exit 1
+"$PROGRAM_DIR/setup-dbus" || error "pipeware setup failed" && exit 1
 
 #########################################################################################
 # PROGRAM 
