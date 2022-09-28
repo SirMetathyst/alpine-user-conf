@@ -34,3 +34,5 @@ fi
 
 step "starting dbus service"
 rc-service dbus start
+
+program_end()
