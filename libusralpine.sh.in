@@ -24,7 +24,7 @@ header()
 error()
 {
     echo 
-    echo -e "# ${LIGHT_RED}$1${ENDCOLOR}"
+    echo -e "${LIGHT_RED}# $1${ENDCOLOR}"
 }
 
 step()
