@@ -24,7 +24,7 @@ VERSION=@VERSION@
 # PROGRAM 
 #########################################################################################
 
-program_start()
+program_start
 
 header "$PROGRAM"
 
@@ -345,4 +345,4 @@ footer_text "dbus-launch --exit-with-session seatd-launch sway when using"
 footer_text "seatd with seatd launch"
 footer_end
 
-program_end()
+program_end

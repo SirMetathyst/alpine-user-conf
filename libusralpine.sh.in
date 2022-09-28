@@ -9,11 +9,13 @@ WHITE="\e[97m"
 LIGHT_CYAN="\e[96m"
 ENDCOLOR="\e[0m"
 
-program_start() {
+program_start() 
+{
     echo -e "${GRAY}"
 }
 
-program_end() {
+program_end() 
+{
     echo -e "${ENDCOLOR}"
 }
 
