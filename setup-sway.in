@@ -51,7 +51,8 @@ step "adding ttf fonts"
 apk add ttf-dejavu || die "sway setup - failed to install fonts" 
 
 step "adding sway"
-apk add xwayland \
+apk add sway \
+      xwayland \
       xdg-desktop-portal \
       xdg-desktop-portal-wlr \
       foot \
