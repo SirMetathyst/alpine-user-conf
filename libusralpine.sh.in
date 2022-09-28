@@ -24,19 +24,12 @@ header()
 
 error()
 {
-    echo 
-    echo -e "${LIGHT_RED}# $1${ENDCOLOR}"
+    echo -e "${LIGHT_RED}* $1${ENDCOLOR}"
 }
 
 task()
 {
-    echo -e "${LIGHT_MAGENTA}-- $1${ENDCOLOR}"   
-}
-
-task_divider()
-{
-    echo
-    echo
+    echo -e "${CYAN}-- $1${ENDCOLOR}"   
 }
 
 step()

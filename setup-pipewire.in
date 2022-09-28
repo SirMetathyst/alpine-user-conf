@@ -18,9 +18,9 @@ VERSION=@VERSION@
 # PREREQUISITES 
 #########################################################################################
 
+echo
 task "1. setup-dbus"
 task "2. setup-pipewire"
-task_divider
 
 "$PROGRAM_DIR/setup-dbus" || error "pipeware setup failed" && exit 1
 
