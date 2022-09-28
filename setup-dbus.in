@@ -23,11 +23,8 @@ header "$PROGRAM"
 step "adding dbus"
 apk add dbus dbus-openrc || die "dbus setup - failed to install dbus"
 
-rc-update add dbus default \
-    || step "deleting dbus" \
-    && apk del dbus dbus-openrc \
-    && die "dbus setup - failed to start service"
+step "adding dbus service to default"
+rc-update add dbus default || die "dbus setup - failed to add service to default"
 
 step "starting dbus service"
-rc-service dbus start \
-    || warn "dbus setup - failed to start dbus service. please run manually."
+rc-service dbus start || warn "dbus setup - failed to start dbus service. please run manually."
