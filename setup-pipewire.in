@@ -22,7 +22,7 @@ echo
 task "1. setup-dbus"
 task "2. setup-pipewire"
 
-"$PROGRAM_DIR/setup-dbus" || error "pipeware setup failed" && exit 1
+"$PROGRAM_DIR/setup-dbus" || error "pipeware setup failed" 
 
 #########################################################################################
 # PROGRAM 
@@ -31,7 +31,7 @@ task "2. setup-pipewire"
 header "$PROGRAM"
 
 step "adding pipewire"
-apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || error "pipeware setup failed" && exit 2
+apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || error "pipeware setup failed" 
 
 step "adding audio group"
 addgroup root audio

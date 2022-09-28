@@ -25,6 +25,7 @@ header()
 error()
 {
     echo -e "${LIGHT_RED}* $1${ENDCOLOR}"
+    exit 1
 }
 
 task()
