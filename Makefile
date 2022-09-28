@@ -12,7 +12,9 @@ SETUP_FILES := setup-consolefont\
 	      setup-doas\
 	      setup-bluetooth-pipewire\
 	      setup-udevil\
-		  setup-dbus
+		  setup-dbus\
+		  setup-sway\
+		  setup-seatd
 
 SCRIPTS    := $(LIB_FILES) $(SETUP_FILES)
 
