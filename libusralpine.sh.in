@@ -5,12 +5,12 @@
 #########################################################################################
 
 GRAY="\e[90m"
-BLUE="\e[34m"
+LIGHT_BLUE="\e[94m"
 ENDCOLOR="\e[0m"
 
 header()
 {
-    echo -e "${BLUE}"
+    echo -e "${LIGHT_BLUE}"
     echo "#########################################################################################"
     echo "# $1"   
     echo "#########################################################################################"
@@ -26,12 +26,12 @@ footer_start()
 {
     echo
     echo 
-    echo -e "${BLUE}note: ${ENDCOLOR}"
+    echo -e "${LIGHT_BLUE}note: ${ENDCOLOR}"
 }
 
 footer_text()
 {
-    echo -e "${BLUE}# $1${ENDCOLOR}"
+    echo -e "${LIGHT_BLUE}# $1${ENDCOLOR}"
 }
 
 footer_end()
