@@ -9,6 +9,7 @@ GRAY="\e[90m"
 LIGHT_GRAY="\e[37m"
 LIGHT_MAGENTA="\e[95m"
 LIGHT_CYAN="\e[96m"
+LIGHT_RED="\e[91m"
 ENDCOLOR="\e[0m"
 
 header()
@@ -18,6 +19,12 @@ header()
     echo "# $1"   
     echo "#########################################################################################"
     echo -e "${ENDCOLOR}"
+}
+
+error()
+{
+    echo 
+    echo -e "# ${LIGHT_RED}$1${ENDCOLOR}"
 }
 
 step()
