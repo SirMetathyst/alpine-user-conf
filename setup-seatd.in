@@ -25,11 +25,18 @@ VERSION=@VERSION@
 
 header "$PROGRAM"
 
-step "adding dbus"
-apk add dbus dbus-openrc || die "dbus setup - failed to install dbus"
 
-step "adding dbus service to default"
-rc-update add dbus default || die "dbus setup - failed to add dbus service to default"
+step "adding seatd"
+apk add seatd || die "seatd setup - failed to install seatd"
 
-step "starting dbus service"
-rc-service dbus start || warn "dbus setup - failed to start dbus service. please run manually."
+step "adding seatd service to default"
+rc-update add seatd default || die "seatd setup - failed to add seatd service to default"
+
+step "starting seatd service"
+rc-service seatd start || warn "seatd setup - failed to start seatd service. please run manually."
+
+step "adding root to seat group"
+adduser root seat || warn "seatd setup - failed to add root to seat group. please add manually."
+
+step "adding $DOAS_USER to seat group"
+adduser $DOAS_USER seat || warn "seatd setup - failed to add $DOAS_USER to seat group. please add manually."

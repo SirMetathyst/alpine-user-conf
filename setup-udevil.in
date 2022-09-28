@@ -3,10 +3,6 @@
 PROGRAM=setup-udevil
 VERSION=@VERSION@
 
-# PREFIX=
-# . $PREFIX/lib/libalpine.sh
-# . $PREFIX/lib/libusralpine.sh
-
 echo "Adding udevil"
 apk add udevil
 

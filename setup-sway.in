@@ -1,0 +1,75 @@
+#!/bin/sh
+
+if [ $(id -u) -ne 0 ]; then
+   echo "this script must be run as root"
+   exit 1
+fi
+
+#########################################################################################
+# PROGRAM METADATA
+#########################################################################################
+
+PROGRAM=$(basename "$0")
+PROGRAM_DIR=@PROGRAM_DIR@
+VERSION=@VERSION@
+
+#########################################################################################
+# PROGRAM DEPENDENCIES
+#########################################################################################
+
+. "@LIB_DIR@/libusralpine.sh"
+
+#########################################################################################
+# PREREQUISITES 
+#########################################################################################
+
+echo
+task "1. setup-dbus"
+task "2. setup-seatd"
+task "3. setup-pipewire"
+task "4. setup-udev"
+task "5. setup-sway"
+
+"$PROGRAM_DIR/setup-dbus" || die "sway setup - failed to install prerequisite: dbus" 
+"$PROGRAM_DIR/setup-seatd" || die "sway setup - failed to install prerequisite: seatd"
+"$PROGRAM_DIR/setup-pipewire" || die "sway setup - failed to install prerequisite: pipewire" 
+
+#########################################################################################
+# PROGRAM 
+#########################################################################################
+
+header "$PROGRAM"
+
+
+step "adding eudev"
+apk add eudev || die "sway setup - failed to install eudev" 
+
+step "setting up udev"
+setup-udev || die "sway setup - failed to setup udev" 
+
+step "adding ttf fonts"
+apk add ttf-dejavu || die "sway setup - failed to install fonts" 
+
+step "adding sway"
+apk add xwayland \
+      xdg-desktop-portal \
+      xdg-desktop-portal-wlr \
+      foot \
+      swaylock \
+      swaylockd \
+      swaybg \
+      swayidle || die "sway setup - failed to install sway"
+
+step "restarting dbus service"
+rc-service dbus restart || warn "sway setup - failed to restart dbus service. please restart manually."
+
+footer_start
+footer_text "remember to copy /etc/sway/config to ~/.config/sway/config"
+footer_text "if you don't have an existing configuration file already."
+footer_text "for additional information, you can start at 'man 5 sway'."
+footer_text "launch support programs by adding these lines to your"
+footer_text "configuration file:"
+footer_text "exec /usr/libexec/pipewire-launcher #pipewire must be launched first"
+footer_text "exec /usr/libexec/xdg-desktop-portal-wlr"
+footer_text "run sway with: dbus-run-session -- sway"
+footer_end
