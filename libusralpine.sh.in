@@ -17,7 +17,7 @@ program_start()
 
 program_end() 
 {
-    # echo -e "${ENDCOLOR}"
+    echo -e ""
 }
 
 header()
