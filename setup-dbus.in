@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ "$EUID" -ne 0 ]; then 
-    echo "please run as root"
-    exit 1
+if [[ $EUID -ne 0 ]]; then
+   echo "this script must be run as root"
+   exit 1
 fi
 
 #########################################################################################
