@@ -6,7 +6,7 @@
 
 WHITE="\e[97m"
 GRAY="\e[90m"
-BLUE="\e[36m"
+BLUE="\e[34m"
 LIGHT_GRAY="\e[37m"
 LIGHT_MAGENTA="\e[95m"
 LIGHT_CYAN="\e[96m"
