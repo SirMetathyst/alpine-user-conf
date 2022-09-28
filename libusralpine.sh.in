@@ -4,33 +4,34 @@
 # MODULE 
 #########################################################################################
 
+GRAY="\e[90m"
+BLUE="\e[34m"
+ENDCOLOR="\e[0m"
+
 header()
 {
-    echo
+    echo ${BLUE}
     echo "#########################################################################################"
     echo "# $1"   
     echo "#########################################################################################"
-    echo
+    echo ${ENDCOLOR}
 }
 
 step()
 {
-    echo "-> $1"   
+    echo -e "${GRAY}-> $1${ENDCOLOR}"   
 }
 
 footer_start()
 {
     echo
-    echo
-
-    if [ $# -gt 0 ]; then 
-        echo "$1"
-    fi 
+    echo 
+    echo "${BLUE}note: ${ENDCOLOR}"
 }
 
 footer_text()
 {
-    echo "# $1"
+    echo "${BLUE}# $1${ENDCOLOR}"
 }
 
 footer_end()

@@ -24,9 +24,7 @@ step "adding dbus"
 apk add dbus dbus-openrc || exit 1
 
 step "adding dbus service to default"
-rc-update add dbus default
-
-if [ $? -gt 0 ]; then 
+if ! rc-update add dbus default; then 
     step "deleting dbus"
     apk del dbus dbus-openrc
     exit 1
