@@ -6,19 +6,9 @@
 
 GRAY="\e[90m"
 LIGHT_GRAY="\e[37m"
-WHITE="\e[97m"
+LIGHT_MAGENTA="\e[95m"
 LIGHT_CYAN="\e[96m"
 ENDCOLOR="\e[0m"
-
-program_start() 
-{
-    echo -e "${LIGHT_GRAY}"
-}
-
-program_end() 
-{
-    echo -e ""
-}
 
 header()
 {
@@ -26,24 +16,24 @@ header()
     echo "#########################################################################################"
     echo "# $1"   
     echo "#########################################################################################"
-    echo -e "${LIGHT_GRAY}"
+    echo -e "${ENDCOLOR}"
 }
 
 step()
 {
-    echo -e "${WHITE}-> $1${LIGHT_GRAY}"   
+    echo -e "${LIGHT_MAGENTA}-> $1${ENDCOLOR}"   
 }
 
 footer_start()
 {
     echo
     echo 
-    echo -e "${LIGHT_CYAN}# note:${LIGHT_GRAY}"
+    echo -e "${LIGHT_CYAN}# note:${ENDCOLOR}"
 }
 
 footer_text()
 {
-    echo -e "${LIGHT_CYAN}# $1${LIGHT_GRAY}"
+    echo -e "${LIGHT_CYAN}# $1${ENDCOLOR}"
 }
 
 footer_end()
