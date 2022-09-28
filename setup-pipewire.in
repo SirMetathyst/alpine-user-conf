@@ -33,12 +33,14 @@ header "$PROGRAM"
 step "adding pipewire"
 apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || die "pipeware setup - failed to install pipewire" 
 
-step "adding audio group"
+step "adding root to audio group"
 addgroup root audio
+
+step "adding $USER to audio group"
 addgroup "$USER" audio
 
 step "creating directory /etc/pipewire"
-mkdir -p /etc/pipewire || exit 3
+mkdir -p /etc/pipewire || die "pipewire setup - failed to create directory /etc/pipewire"
 
 step "overwriting /etc/pipewire/pipewire.conf with custom configuration"
 cat >/etc/pipewire/pipewire.conf <<-__EOF__
@@ -337,7 +339,7 @@ if ! grep -q "snd_seq" /etc/modules; then
 fi
 
 step "restarting dbus service"
-rc-service dbus restart
+rc-service dbus restart || warn "pipewire setup - failed to restart dbus service. please restart manually."
 
 footer_start
 footer_text "start pipewire with pipewire &"
