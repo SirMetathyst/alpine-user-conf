@@ -4,6 +4,7 @@
 # MODULE 
 #########################################################################################
 
+WHITE="\e[97m"
 GRAY="\e[90m"
 LIGHT_GRAY="\e[37m"
 LIGHT_MAGENTA="\e[95m"
@@ -21,7 +22,7 @@ header()
 
 step()
 {
-    echo -e "${LIGHT_MAGENTA}-> $1${ENDCOLOR}"   
+    echo -e "${WHITE}-> $1${ENDCOLOR}"   
 }
 
 footer_start()
