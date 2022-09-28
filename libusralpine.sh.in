@@ -31,14 +31,14 @@ header()
 
 step()
 {
-    echo -e "${WHITE}-> $1${LIGHT_GRAY}"   
+    echo -e "${WHITE}-> $1 ${LIGHT_GRAY}"   
 }
 
 footer_start()
 {
     echo
     echo 
-    echo -e "${LIGHT_CYAN}note: ${LIGHT_GRAY}"
+    echo -e "${LIGHT_CYAN}# note: ${LIGHT_GRAY}"
 }
 
 footer_text()
