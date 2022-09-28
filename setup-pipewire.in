@@ -18,7 +18,7 @@ VERSION=@VERSION@
 # PREREQUISITES 
 #########################################################################################
 
-"$PROGRAM_DIR/setup-dbus" || error "pipeware setup failed" && exit 1
+"$PROGRAM_DIR/setup-dbus" || (error "pipeware setup failed" && exit 1)
 
 #########################################################################################
 # PROGRAM 
@@ -27,14 +27,14 @@ VERSION=@VERSION@
 header "$PROGRAM"
 
 step "adding pipewire"
-apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || error "pipeware setup failed" && exit 1
+apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || (error "pipeware setup failed" && exit 2)
 
 step "adding audio group"
 addgroup root audio
 addgroup "$USER" audio
 
 step "creating directory /etc/pipewire"
-mkdir -p /etc/pipewire || exit 2
+mkdir -p /etc/pipewire || exit 3
 
 step "overwriting /etc/pipewire/pipewire.conf with custom configuration"
 cat >/etc/pipewire/pipewire.conf <<-__EOF__

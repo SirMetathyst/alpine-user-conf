@@ -21,13 +21,13 @@ VERSION=@VERSION@
 header "$PROGRAM"
 
 step "adding dbus"
-apk add dbus dbus-openrc || error "dbus setup failed" && exit 1
+apk add dbus dbus-openrc || (error "dbus setup failed" && exit 1)
 
 step "adding dbus service to default"
 if ! rc-update add dbus default; then 
     step "deleting dbus"
     apk del dbus dbus-openrc
-    exit 1
+    exit 2
 fi
 
 step "starting dbus service"
