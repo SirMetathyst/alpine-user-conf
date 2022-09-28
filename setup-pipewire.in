@@ -24,8 +24,6 @@ VERSION=@VERSION@
 # PROGRAM 
 #########################################################################################
 
-program_start
-
 header "$PROGRAM"
 
 step "adding pipewire"
@@ -344,5 +342,3 @@ footer_text "dbus-launch --exit-with-session sway or"
 footer_text "dbus-launch --exit-with-session seatd-launch sway when using"
 footer_text "seatd with seatd launch"
 footer_end
-
-program_end
