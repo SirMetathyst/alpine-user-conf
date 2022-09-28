@@ -18,6 +18,8 @@ VERSION=@VERSION@
 # PROGRAM 
 #########################################################################################
 
+program_start()
+
 header "$PROGRAM"
 
 step "adding dbus"
