@@ -6,6 +6,7 @@
 
 WHITE="\e[97m"
 GRAY="\e[90m"
+CYAN="\e[36m"
 LIGHT_GRAY="\e[37m"
 LIGHT_MAGENTA="\e[95m"
 LIGHT_CYAN="\e[96m"
@@ -14,7 +15,7 @@ ENDCOLOR="\e[0m"
 
 header()
 {
-    echo -e "${LIGHT_CYAN}"
+    echo -e "${CYAN}"
     echo "#########################################################################################"
     echo "# $1"   
     echo "#########################################################################################"
@@ -27,6 +28,17 @@ error()
     echo -e "${LIGHT_RED}# $1${ENDCOLOR}"
 }
 
+task()
+{
+    echo -e "${LIGHT_MAGENTA}-- $1${ENDCOLOR}"   
+}
+
+task_divider()
+{
+    echo
+    echo
+}
+
 step()
 {
     echo -e "${WHITE}-> $1${ENDCOLOR}"   
@@ -36,12 +48,12 @@ footer_start()
 {
     echo
     echo 
-    echo -e "${LIGHT_CYAN}# note:${ENDCOLOR}"
+    echo -e "${CYAN}# note:${ENDCOLOR}"
 }
 
 footer_text()
 {
-    echo -e "${LIGHT_CYAN}# $1${ENDCOLOR}"
+    echo -e "${CYAN}# $1${ENDCOLOR}"
 }
 
 footer_end()
