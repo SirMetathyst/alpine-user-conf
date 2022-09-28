@@ -10,11 +10,11 @@ ENDCOLOR="\e[0m"
 
 header()
 {
-    echo ${BLUE}
+    echo -e "${BLUE}"
     echo "#########################################################################################"
     echo "# $1"   
     echo "#########################################################################################"
-    echo ${ENDCOLOR}
+    echo -e "${ENDCOLOR}"
 }
 
 step()
@@ -26,12 +26,12 @@ footer_start()
 {
     echo
     echo 
-    echo "${BLUE}note: ${ENDCOLOR}"
+    echo -e "${BLUE}note: ${ENDCOLOR}"
 }
 
 footer_text()
 {
-    echo "${BLUE}# $1${ENDCOLOR}"
+    echo -e "${BLUE}# $1${ENDCOLOR}"
 }
 
 footer_end()
