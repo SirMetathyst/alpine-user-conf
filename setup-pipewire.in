@@ -38,7 +38,7 @@ header "$PROGRAM"
 
 
 step "adding pipewire"
-apk add pipewire pipewire-alsa pipewire-pulse wireplumberc rtkit || die "pipeware setup - failed to install pipewire" 
+apk add pipewire pipewire-alsa pipewire-pulse wireplumber rtkit || die "pipeware setup - failed to install pipewire" 
 
 step "adding root to rtkit group"
 addgroup root rtkit || die "pipewire setup - failed to add root to rtkit group"
