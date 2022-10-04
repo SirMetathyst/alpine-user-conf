@@ -10,29 +10,31 @@ fi
 #########################################################################################
 
 PROGRAM=$(basename "$0")
-LIB_DIR=@LIB_DIR@
 
 #########################################################################################
 # PROGRAM DEPENDENCIES
 #########################################################################################
 
-. "$LIB_DIR/libusralpine.sh"
-
-#########################################################################################
-# PREREQUISITES 
-#########################################################################################
-
-echo
-task "1. setup-pipewire"
-task "2. setup-sway"
-task "3. setup-flatpak"
-
-"$PROGRAM_DIR/setup-pipewire" || die "desktop setup - failed to install prerequisite: pipewire" 
-"$PROGRAM_DIR/setup-sway" || die "desktop setup - failed to install prerequisite: sway" 
-"$PROGRAM_DIR/setup-flatpak" || die "desktop setup - failed to install prerequisite: flatpak" 
+. "/lib/libusralpine.sh"
 
 #########################################################################################
 # PROGRAM 
 #########################################################################################
 
 header "$PROGRAM"
+
+
+step "adding seatd"
+apk add seatd || die "seatd setup - failed to install seatd"
+
+step "adding root to seat group"
+adduser root seat || die "seatd setup - failed to add root to seat group"
+
+step "adding $DOAS_USER to seat group"
+adduser "$DOAS_USER" seat || die "seatd setup - failed to add $DOAS_USER to seat group"
+
+step "adding seatd service to default"
+rc-update add seatd default || die "seatd setup - failed to add seatd service to default"
+
+step "starting seatd service"
+rc-service seatd start || die "seatd setup - failed to start seatd service"

@@ -4,8 +4,7 @@
 # MODULE 
 #########################################################################################
 
-PROGRAM_DIR=@PROGRAM_DIR@
-VERSION=@VERSION@
+PROGRAM_DIR=/usr/bin
 
 WHITE="\e[97m"
 LIGHT_BLUE="\e[94m"
