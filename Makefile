@@ -2,6 +2,8 @@ VERSION    := 0.1
 
 LIB_FILES  := libusralpine.sh
 
+DEST := /usr/bin
+
 SETUP_FILES := setup-consolefont\
 	      setup-pipewire\
 	      setup-doas\
@@ -19,7 +21,7 @@ WWW="https://github.com/SirMetathyst/alpine-user-conf"
 
 SED         := sed
 SED_REPLACE := -e 's:@VERSION@:$(VERSION):g' \
-				-e 's:@PROGRAM_DIR@:/sbin:g'\
+				-e 's:@PROGRAM_DIR@:/$(DEST):g'\
 				-e 's:@LIB_DIR@:/lib:g'\
 
 .SUFFIXES: .sh.in .in
@@ -33,14 +35,14 @@ SED_REPLACE := -e 's:@VERSION@:$(VERSION):g' \
 all: $(SCRIPTS) 
 
 install:  $(SETUP_FILES) $(LIB_FILES)
-	install -m 755 -d /sbin
-	install -m 755 $(SETUP_FILES) /sbin
+	install -m 755 -d /$(DEST)
+	install -m 755 $(SETUP_FILES) /$(DEST)
 	install -m 755 -d /lib
 	install -m 755 $(LIB_FILES) /lib
 
 uninstall:
 	for i in $(SETUP_FILES); do \
-		rm -f "/sbin/$$i";\
+		rm -f "/$(DEST)/$$i";\
 	done
 	for i in $(LIB_FILES); do \
 		rm -f "/lib/$$i";\
