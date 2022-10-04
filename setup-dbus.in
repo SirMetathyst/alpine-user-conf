@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if [ $(id -u) -ne 0 ]; then
-   echo "this script must be run as root"
+if [ "$(id -u)" -ne 0 ] || [ "$DOAS_USER" = "root" ] || [ "$DOAS_USER" = "" ]; then
+   echo "run this script as a regular user using doas"
    exit 1
 fi
 
@@ -25,6 +25,7 @@ VERSION=@VERSION@
 
 header "$PROGRAM"
 
+
 step "adding dbus"
 apk add dbus dbus-openrc || die "dbus setup - failed to install dbus"
 
@@ -32,4 +33,4 @@ step "adding dbus service to default"
 rc-update add dbus default || die "dbus setup - failed to add dbus service to default"
 
 step "starting dbus service"
-rc-service dbus start || warn "dbus setup - failed to start dbus service. please run manually."
+rc-service dbus start || die "dbus setup - failed to start dbus service"

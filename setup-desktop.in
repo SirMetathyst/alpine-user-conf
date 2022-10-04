@@ -21,17 +21,20 @@ LIB_DIR=@LIB_DIR@
 . "$LIB_DIR/libusralpine.sh"
 
 #########################################################################################
+# PREREQUISITES 
+#########################################################################################
+
+echo
+task "1. setup-pipewire"
+task "2. setup-sway"
+task "3. setup-flatpak"
+
+"$PROGRAM_DIR/setup-pipewire" || die "desktop setup - failed to install prerequisite: pipewire" 
+"$PROGRAM_DIR/setup-sway" || die "desktop setup - failed to install prerequisite: sway" 
+"$PROGRAM_DIR/setup-flatpak" || die "desktop setup - failed to install prerequisite: flatpak" 
+
+#########################################################################################
 # PROGRAM 
 #########################################################################################
 
 header "$PROGRAM"
-
-
-step "adding udevil"
-apk add udevil || die "udevil setup - failed to install udevil" 
-
-step "adding root to plugdev group"
-addgroup root plugdev || die "udevil setup - failed to add root to plugdev group" 
-
-step "adding $DOAS_USER to plugdev group"
-addgroup "$DOAS_USER" plugdev || die "udevil setup - failed to add $DOAS_USER to plugdev group" 

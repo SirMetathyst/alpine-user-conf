@@ -3,18 +3,14 @@ VERSION    := 0.1
 LIB_FILES  := libusralpine.sh
 
 SETUP_FILES := setup-consolefont\
-	      setup-networking\
-	      setup-networking-with-wifi\
-	      setup-networking-with-wifi-only\
-	      setup-alsa\
-	      setup-alsa-pulseaudio\
 	      setup-pipewire\
 	      setup-doas\
-	      setup-bluetooth-pipewire\
 	      setup-udevil\
 		  setup-dbus\
 		  setup-sway\
-		  setup-seatd
+		  setup-flatpak\
+		  setup-seatd\
+		  setup-desktop
 
 SCRIPTS    := $(LIB_FILES) $(SETUP_FILES)
 

@@ -1,23 +1,43 @@
 #!/bin/sh
 
-PROGRAM=setup-consolefont
+if [ "$(id -u)" -ne 0 ] || [ "$DOAS_USER" = "root" ] || [ "$DOAS_USER" = "" ]; then
+   echo "run this script as a regular user using doas"
+   exit 1
+fi
+
+#########################################################################################
+# PROGRAM METADATA
+#########################################################################################
+
+PROGRAM=$(basename "$0")
+PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
 
-# PREFIX=
-# . $PREFIX/lib/libalpine.sh
-# . $PREFIX/lib/libusralpine.sh
+#########################################################################################
+# PROGRAM DEPENDENCIES
+#########################################################################################
 
-APKPKGS=terminus-font
-FONT=ter-132n.psf.gz
+. "@LIB_DIR@/libusralpine.sh"
 
-echo "Adding font"
-apk add "$APKPKGS" || exit 1
+#########################################################################################
+# PROGRAM DATA
+#########################################################################################
 
-echo "Using font"
-setfont /usr/share/consolefonts/$FONT || exit 2
+FONTPKG=terminus-font
+FONT=ter-116n.psf.gz
 
-echo "Overwriting /etc/conf.d/consolefont with custom configuration"
-cat >/etc/conf.d/consolefont <<-__EOF__
+#########################################################################################
+# PROGRAM 
+#########################################################################################
+
+header "$PROGRAM"
+
+
+step "adding font"
+apk add "$FONTPKG" ||  die "consolefont setup - failed to add $FONTPKG."
+
+step "adding font configuration"
+{ cat >/etc/conf.d/consolefont <<-__EOF__
 # The consolefont service is not activated by default. If you need to
 # use it, you should run "rc-update add consolefont boot" as root.
 #
@@ -33,6 +53,10 @@ consolefont="default8x16.psf.gz"
 # alpine-user-conf: setup-consolefont
 consolefont="$FONT"
 __EOF__
+} ||  die "consolefont setup - failed to add font configuration."
 
-echo "Adding consolefont service to boot"
-rc-update add consolefont boot
+step "adding consolefont service to boot"
+rc-update add consolefont boot || die "consolefont setup - failed to add consolefont service to boot."
+
+step "setting font"
+setfont "/usr/share/consolefonts/$FONT" || warn "consolefont setup - failed to set $FONT."

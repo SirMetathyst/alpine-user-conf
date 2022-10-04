@@ -1,0 +1,34 @@
+#!/bin/sh
+
+if [ "$(id -u)" -ne 0 ] || [ "$DOAS_USER" = "root" ] || [ "$DOAS_USER" = "" ]; then
+   echo "run this script as a regular user using doas"
+   exit 1
+fi
+
+#########################################################################################
+# PROGRAM METADATA
+#########################################################################################
+
+PROGRAM=$(basename "$0")
+PROGRAM_DIR=@PROGRAM_DIR@
+VERSION=@VERSION@
+LIB_DIR=@LIB_DIR@
+
+#########################################################################################
+# PROGRAM DEPENDENCIES
+#########################################################################################
+
+. "$LIB_DIR/libusralpine.sh"
+
+#########################################################################################
+# PROGRAM 
+#########################################################################################
+
+header "$PROGRAM"
+
+
+step "adding flatpak"
+apk add flatpak || die "flatpak setup - failed to install flatpak" 
+
+step "adding flathub repo"
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || warn "flatpak setup - failed to add flathub repo" 

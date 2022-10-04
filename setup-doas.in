@@ -1,20 +1,39 @@
 #!/bin/sh
 
-PROGRAM=setup-doas
+if [ "$(id -u)" -ne 0 ] || [ "$TARGET_USER" = "root" ] || [ "$TARGET_USER" = "" ]; then
+   echo "run this script as root and set TARGET_USER environment variable"
+   exit 1
+fi
+
+#########################################################################################
+# PROGRAM METADATA
+#########################################################################################
+
+PROGRAM=$(basename "$0")
+PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
+LIB_DIR=@LIB_DIR@
 
-# PREFIX=
-# . $PREFIX/lib/libalpine.sh
-# . $PREFIX/lib/libusralpine.sh
+#########################################################################################
+# PROGRAM DEPENDENCIES
+#########################################################################################
 
-echo "Adding doas"
+. "$LIB_DIR/libusralpine.sh"
+
+#########################################################################################
+# PROGRAM 
+#########################################################################################
+
+step "adding doas"
 apk add doas
 
-echo "Adding wheel group"
+step "adding root to wheel group"
 addgroup root wheel
-addgroup $USER wheel
 
-echo "Overwriting /etc/doas.conf with custom configuration"
+step "adding $TARGET_USER to wheel group"
+addgroup "$TARGET_USER" wheel
+
+step "adding configuration"
 cat >/etc/doas.conf <<-__EOF__
 # alpine-user-conf: setup-doas
 

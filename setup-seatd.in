@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if [ $(id -u) -ne 0 ]; then
-   echo "this script must be run as root"
+if [ "$(id -u)" -ne 0 ] || [ "$DOAS_USER" = "root" ] || [ "$DOAS_USER" = "" ]; then
+   echo "run this script as a regular user using doas"
    exit 1
 fi
 
@@ -12,12 +12,13 @@ fi
 PROGRAM=$(basename "$0")
 PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
+LIB_DIR=@LIB_DIR@
 
 #########################################################################################
 # PROGRAM DEPENDENCIES
 #########################################################################################
 
-. "@LIB_DIR@/libusralpine.sh"
+. "$LIB_DIR/libusralpine.sh"
 
 #########################################################################################
 # PROGRAM 
@@ -29,14 +30,14 @@ header "$PROGRAM"
 step "adding seatd"
 apk add seatd || die "seatd setup - failed to install seatd"
 
+step "adding root to seat group"
+adduser root seat || die "seatd setup - failed to add root to seat group"
+
+step "adding $DOAS_USER to seat group"
+adduser "$DOAS_USER" seat || die "seatd setup - failed to add $DOAS_USER to seat group"
+
 step "adding seatd service to default"
 rc-update add seatd default || die "seatd setup - failed to add seatd service to default"
 
 step "starting seatd service"
-rc-service seatd start || warn "seatd setup - failed to start seatd service. please run manually."
-
-step "adding root to seat group"
-adduser root seat || warn "seatd setup - failed to add root to seat group. please add manually."
-
-step "adding $DOAS_USER to seat group"
-adduser $DOAS_USER seat || warn "seatd setup - failed to add $DOAS_USER to seat group. please add manually."
+rc-service seatd start || die "seatd setup - failed to start seatd service"

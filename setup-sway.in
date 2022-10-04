@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if [ $(id -u) -ne 0 ]; then
-   echo "this script must be run as root"
+if [ "$(id -u)" -ne 0 ] || [ "$DOAS_USER" = "root" ] || [ "$DOAS_USER" = "" ]; then
+   echo "run this script as a regular user using doas"
    exit 1
 fi
 
@@ -12,12 +12,13 @@ fi
 PROGRAM=$(basename "$0")
 PROGRAM_DIR=@PROGRAM_DIR@
 VERSION=@VERSION@
+LIB_DIR=@LIB_DIR@
 
 #########################################################################################
 # PROGRAM DEPENDENCIES
 #########################################################################################
 
-. "@LIB_DIR@/libusralpine.sh"
+. "$LIB_DIR/libusralpine.sh"
 
 #########################################################################################
 # PREREQUISITES 
@@ -26,13 +27,11 @@ VERSION=@VERSION@
 echo
 task "1. setup-dbus"
 task "2. setup-seatd"
-task "3. setup-pipewire"
-task "4. setup-udev"
-task "5. setup-sway"
+task "3. setup-udev"
+task "4. setup-sway"
 
 "$PROGRAM_DIR/setup-dbus" || die "sway setup - failed to install prerequisite: dbus" 
 "$PROGRAM_DIR/setup-seatd" || die "sway setup - failed to install prerequisite: seatd"
-"$PROGRAM_DIR/setup-pipewire" || die "sway setup - failed to install prerequisite: pipewire" 
 
 #########################################################################################
 # PROGRAM 
@@ -62,7 +61,7 @@ apk add sway \
       swayidle || die "sway setup - failed to install sway"
 
 step "restarting dbus service"
-rc-service dbus restart || warn "sway setup - failed to restart dbus service. please restart manually."
+rc-service dbus restart || die "sway setup - failed to restart dbus service"
 
 footer_start
 footer_text "remember to copy /etc/sway/config to ~/.config/sway/config"
