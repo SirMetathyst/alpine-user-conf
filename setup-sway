@@ -41,7 +41,7 @@ step "adding eudev"
 apk add eudev || die "sway setup - failed to install eudev" 
 
 step "setting up udev"
-setup-udev || die "sway setup - failed to setup udev" 
+setup-devd udev || die "sway setup - failed to setup udev" 
 
 step "adding ttf fonts"
 apk add ttf-dejavu || die "sway setup - failed to install fonts" 

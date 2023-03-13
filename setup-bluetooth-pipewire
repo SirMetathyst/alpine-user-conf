@@ -1,0 +1,17 @@
+#!/bin/sh
+
+PROGRAM=setup-bluetooth-pipewire
+VERSION=exported
+
+# PREFIX=
+# . $PREFIX/lib/libalpine.sh
+# . $PREFIX/lib/libusralpine.sh
+
+echo "Adding bluetooth"
+apk add pipewire-spa-bluez bluez
+
+echo "Adding bluetooth service to default"
+rc-update add bluetooth default
+
+echo "Starting/Restarting bluetooth service"
+rc-service bluetooth restart

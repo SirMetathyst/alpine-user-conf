@@ -1,0 +1,26 @@
+#!/bin/sh
+
+PROGRAM=setup-networking
+VERSION=exported
+
+# PREFIX=
+# . $PREFIX/lib/libalpine.sh
+# . $PREFIX/lib/libusralpine.sh
+
+echo "Overwriting /etc/network/interfaces with custom configuration"
+cat >/etc/network/interfaces <<-__EOF__
+# alpine-user-conf: setup-networking
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
+__EOF__
+
+echo "Adding networking service to boot"
+rc-update add networking boot
+
+echo "Starting/Restarting networking service"
+rc-service networking restart

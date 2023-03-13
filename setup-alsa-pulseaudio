@@ -1,0 +1,23 @@
+#!/bin/sh
+
+#########################################################################################
+# PROGRAM METADATA
+#########################################################################################
+
+PROGRAM=$(basename $0)
+PROGRAM_DIR=/sbin
+VERSION=0.1
+
+#########################################################################################
+# PROGRAM
+#########################################################################################
+
+echo "Adding pulseaudio"
+apk add pulseaudio pulseaudio-alsa alsa-plugins-pulse
+
+echo "Adding audio group"
+addgroup root audio
+addgroup "$USER" audio
+
+echo "Overwriting /etc/security/limits.d/audio.conf with custom configuration"
+echo "@audio - nice -11" > /etc/security/limits.d/audio.conf
